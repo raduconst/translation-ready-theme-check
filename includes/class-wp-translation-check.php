@@ -147,9 +147,13 @@ class Wp_Translation_Check {
 
 		$plugin_admin = new Wp_Translation_Check_Admin( $this->get_plugin_name(), $this->get_version() );
 
+		add_action( 'admin_menu', array( $plugin_admin, 'add_admin_menu' ) );
+		if ( empty( $_GET['page'] ) || $_GET['page'] !== 'wp-translation-check' ) {
+			return ;
+		}
+		add_action( 'admin_init', array( $plugin_admin, 'handle_upload' ) );
 		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_scripts' ) );
-		add_action( 'admin_menu', array( $plugin_admin, 'add_admin_menu' ) );
 
 	}
 

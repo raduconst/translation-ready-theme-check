@@ -69,17 +69,48 @@ class Wp_Translation_Check_Admin {
 	}
 
 	function admin_options_page () { ?>
-		<h1>Ceva</h1>
+		<div class="wrap">
+		<h1>Translation Tester</h1>
+		<p>You need to upload the POT file you would like to check and set a prefix to be added before each string.</p>
+		<form id="pot_upload" action="<?php echo admin_url( 'tools.php?page=wp-translation-check' ); ?>" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="isSubmitted" value="true" />
+			<div class="fieldset">
+				<label for="my_pot_prefix">Set a different prefix:</label>
+				<input type="text" name="pot_prefix" id="my_pot_prefix" value="[test]"><br />
+			</div>
+			<div class="fieldset">
+				<label for="my_pot_upload">Select the POT file:</label>
+				<input type="file" name="pot_upload_file" id="my_pot_upload" multiple="false" /><br />
+			</div>
+			<input id="submit_pot_file" name="submit" class="button button-primary" type="submit" value="Test" />
+		</form>
+		</div>
 	<?php
+
+	}
+
+	public function handle_upload() {
+
+		if ( empty( $_POST['isSubmitted']) || $_POST['isSubmitted'] !== 'true') {
+			return ;
+		}
+
+		if ( empty( $_FILES['pot_upload_file'] ) ) {
+			return ;
+		}
+
+		if ( ! empty( $_FILES['pot_upload_file']['tmp_name'] )) {
+			$this->config['file_path'] = $_FILES['pot_upload_file']['tmp_name'];
+			$this->config['prefix'] = $_POST['pot_prefix'];
+		}
+
 		if ( file_exists( $this->config['file_path'] ) ) {
-			$file = file_get_contents( $this->config['file_path'] );
 
 			// Parse a po file
 			$fileHandler = new poParser\FileHandler( $this->config['file_path'] );
 
 			$poParser = new poParser\PoParser($fileHandler);
 			$entries  = $poParser->parse();
-			$header = $poParser->getHeaders();
 
 			foreach ($entries as $key => $entry ) {
 				if ( ! empty( $entry['msgstr'] ) ) {
@@ -100,12 +131,21 @@ class Wp_Translation_Check_Admin {
 				$poParser->setEntry($key, $entries[$key]);
 			}
 
-			$poParser->writeFile( $this->config['output']);
+			$output = $poParser->compile();
+			$file_name = 'file.po';
 
-			var_dump($header);
-			var_dump($entries);
+			// create the output of the archive
+			header( 'Content-Description: File Transfer' );
+			header( 'CContent-Type: text/plain; charset=utf8' );
+			header( 'Content-Disposition: attachment; filename=' . $file_name  );
+			header( 'Content-Transfer-Encoding: binary' );
+			header( 'Expires: 0' );
+			header( 'Cache-Control: must-revalidate' );
+			header( 'Pragma: public' );
+			echo $output;
+
+			exit;
 		}
-
 	}
 
 	/**
