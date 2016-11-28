@@ -70,16 +70,16 @@ class Wp_Translation_Check_Admin {
 
 	function admin_options_page () { ?>
 		<div class="wrap">
-		<h1>Translation Tester</h1>
-		<p>You need to upload the POT file you would like to check and set a prefix to be added before each string.</p>
+		<h1><?php echo esc_html__( 'Translation Tester', 'translation-tester' ); ?></h1>
+		<p><?php echo esc_html__( 'You need to upload the POT file you would like to check and set a prefix to be added before each string.', 'translation-tester' ); ?></p>
 		<form id="pot_upload" action="<?php echo admin_url( 'tools.php?page=wp-translation-check' ); ?>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="isSubmitted" value="true" />
 			<div class="fieldset">
-				<label for="my_pot_prefix">Set a different prefix:</label>
+				<label for="my_pot_prefix"><?php echo esc_html__( 'Set a different prefix:', 'translation-tester' ); ?></label>
 				<input type="text" name="pot_prefix" id="my_pot_prefix" value="[test]"><br />
 			</div>
 			<div class="fieldset">
-				<label for="my_pot_upload">Select the POT file:</label>
+				<label for="my_pot_upload"><?php echo esc_html__( 'Select the POT file:', 'translation-tester' ); ?></label>
 				<input type="file" name="pot_upload_file" id="my_pot_upload" multiple="false" /><br />
 			</div>
 			<input id="submit_pot_file" name="submit" class="button button-primary" type="submit" value="Test" />

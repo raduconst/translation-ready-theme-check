@@ -11,7 +11,7 @@ Translation Tester is a plugin made to help you check the POT file
 
 == Description ==
 
-Checking the POT file of your theme or plugin can be a really pain sometimes. If you want to make sure that all the strings are included in the POT file, you need to create the PO/MO files from it and translate each string, one by one.
+Checking the POT file of your theme or plugin can be a real pain sometimes. If you want to make sure that all the strings are included in the POT file, you need to create the PO/MO files from it and translate each string, one by one.
 
 This plugin is made to do a simple thing: get all the strings from your POT file and the translated part will be a concatenation between the original string and a prefix at your choice.
 
