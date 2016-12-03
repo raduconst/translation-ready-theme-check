@@ -1,18 +1,5 @@
 <?php
-
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              http://pickngrip.com/
- * @since             1.0.0
- * @package           Wp_Translation_Check
- *
- * @wordpress-plugin
  * Plugin Name:       Translation Tester
  * Plugin URI:        http://pickngrip.com/translation-tester/
  * Description:       Check if the POT file that you are trying to use contains all the strings of the plugin or theme.
@@ -45,9 +32,5 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-translation-tester.php';
  *
  * @since    1.0.0
  */
-function run_plugin_name() {
 
-	$plugin = new Translation_Tester();
-
-}
-run_plugin_name();
+$translatation_tester_plugin = new Translation_Tester();
