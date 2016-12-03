@@ -27,7 +27,7 @@
  * @subpackage Wp_Translation_Check/includes
  * @author     Your Name <email@example.com>
  */
-class Wp_Translation_Check {
+class Translation_Tester {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -71,9 +71,9 @@ class Wp_Translation_Check {
 		$this->plugin_name = 'wp-translation-check';
 		$this->version = '1.0.0';
 
-		$this->load_dependencies();
-		$this->set_locale();
-		$this->define_admin_hooks();
+		$this->tt_load_dependencies();
+		$this->tt_set_locale();
+		$this->tt_define_admin_hooks();
 
 	}
 
@@ -93,19 +93,19 @@ class Wp_Translation_Check {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function tt_load_dependencies() {
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-translation-check-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-translation-tester-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-translation-check-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-translation-tester-i18n.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/poParser/InterfaceHandler.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/poParser/FileHandler.php';
@@ -115,7 +115,7 @@ class Wp_Translation_Check {
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-translation-check-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-translation-tester-admin.php';
 
 	}
 
@@ -128,11 +128,11 @@ class Wp_Translation_Check {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function tt_set_locale() {
 
-		$plugin_i18n = new Wp_Translation_Check_i18n();
+		$plugin_i18n = new Translation_Tester_i18n();
 
-		add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
+		add_action( 'plugins_loaded', array( $plugin_i18n, 'tt_load_plugin_textdomain' ) );
 
 	}
 
@@ -143,17 +143,17 @@ class Wp_Translation_Check {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function tt_define_admin_hooks() {
 
-		$plugin_admin = new Wp_Translation_Check_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Translation_Tester_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		add_action( 'admin_menu', array( $plugin_admin, 'add_admin_menu' ) );
+		add_action( 'admin_menu', array( $plugin_admin, 'tt_add_admin_menu' ) );
 		if ( empty( $_GET['page'] ) || $_GET['page'] !== 'wp-translation-check' ) {
 			return ;
 		}
-		add_action( 'admin_init', array( $plugin_admin, 'handle_upload' ) );
-		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_scripts' ) );
+		add_action( 'admin_init', array( $plugin_admin, 'tt_handle_upload' ) );
+		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'tt_enqueue_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'tt_enqueue_scripts' ) );
 
 	}
 

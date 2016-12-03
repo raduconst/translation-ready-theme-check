@@ -30,24 +30,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-wp-translation-check-activator.php
- */
-function activate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-translation-check-activator.php';
-	Wp_Translation_Check_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-wp-translation-check-deactivator.php
- */
-function deactivate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-translation-check-deactivator.php';
-	Wp_Translation_Check_Deactivator::deactivate();
-}
-
 register_activation_hook( __FILE__, 'activate_plugin_name' );
 register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
 
@@ -55,7 +37,7 @@ register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wp-translation-check.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-translation-tester.php';
 
 /**
  * Begins execution of the plugin.
@@ -68,7 +50,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wp-translation-check.php';
  */
 function run_plugin_name() {
 
-	$plugin = new Wp_Translation_Check();
+	$plugin = new Translation_Tester();
 
 }
 run_plugin_name();

@@ -20,7 +20,7 @@
  * @subpackage Wp_Translation_Check/admin
  * @author     Your Name <email@example.com>
  */
-class Wp_Translation_Check_Admin {
+class Translation_Tester_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -61,14 +61,14 @@ class Wp_Translation_Check_Admin {
 
 	}
 
-	function add_admin_menu() {
+	function tt_add_admin_menu() {
 		add_submenu_page( 'tools.php', 'Translation Check', 'Translation Check', 'manage_options', 'wp-translation-check', array(
 			$this,
-			'admin_options_page'
+			'tt_admin_options_page'
 		) );
 	}
 
-	function admin_options_page () { ?>
+	function tt_admin_options_page () { ?>
 		<div class="wrap">
 		<h1><?php echo esc_html__( 'Translation Tester', 'translation-tester' ); ?></h1>
 		<p><?php echo esc_html__( 'You need to upload the POT file you would like to check and set a prefix to be added before each string.', 'translation-tester' ); ?></p>
@@ -89,7 +89,7 @@ class Wp_Translation_Check_Admin {
 
 	}
 
-	public function handle_upload() {
+	public function tt_handle_upload() {
 
 		if ( empty( $_POST['isSubmitted']) || $_POST['isSubmitted'] !== 'true') {
 			return ;
@@ -153,7 +153,7 @@ class Wp_Translation_Check_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function tt_enqueue_styles() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -176,7 +176,7 @@ class Wp_Translation_Check_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function tt_enqueue_scripts() {
 
 		/**
 		 * This function is provided for demonstration purposes only.

@@ -24,7 +24,7 @@
  * @subpackage Wp_Translation_Check/includes
  * @author     Your Name <email@example.com>
  */
-class Wp_Translation_Check_i18n {
+class Translation_Tester_i18n {
 
 
 	/**
@@ -32,7 +32,7 @@ class Wp_Translation_Check_i18n {
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_plugin_textdomain() {
+	public function tt_load_plugin_textdomain() {
 
 		load_plugin_textdomain(
 			'wp-translation-check',
