@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Translation Tester
  * Plugin URI:        http://pickngrip.com/translation-tester/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Check if the POT file that you are trying to use contains all the strings of the plugin or theme.
  * Version:           1.0.0
  * Author:            Radu Constantin
  * Author URI:        http://pickngrip.com/
@@ -29,9 +29,6 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
-register_activation_hook( __FILE__, 'activate_plugin_name' );
-register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
 
 /**
  * The core plugin class that is used to define internationalization,

@@ -41,7 +41,4 @@ class Translation_Tester_i18n {
 		);
 
 	}
-
-
-
 }
